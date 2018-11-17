@@ -1,5 +1,7 @@
 //Click Event for Start button:
-
+$(document).on(function(){
+    console.log("hi")
+})
 $('#start').on("click", function() {
     game.start();
 });
@@ -71,76 +73,83 @@ var game = {
         $("#start").remove();
         for (var i = 0; i < questions.length; i++) {
             $("#sub-container").append("<h2>" + questions[i].question + "</h2>");
-            for (var j = 0; j < questions[i].answers.length; j++) {
+            for (var j = 0; j < questions[i].choices.length; j++) {
                 $("#sub-container").append("<input type='radio' name='question-" + i +
-              "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
+              "' value='" + questions[i].choices[j] + "''>" + questions[i].choices[j] + "</br>");
             }
           }
-      
-          $("#sub-container").append("<button id='start'>START!</button>");
+          //change to submit button w/listener
+          $("#sub-container").append("<button id='submit'>SUBMIT!</button>");
+          $("#submit").on("click", game.done); 
     },
     
     //Done method
     done: function() {
-        $.each("input[name='question-0']:checked"), function() {
+        $.each("input[name='question-0']:checked", function() {
             if($(this).val() === questions[0].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        } //Create for each question in the array(name='question-1', question-2)
+        }) //Create for each question in the array(name='question-1', question-2)
 
-        $.each("input[name='question-1']:checked"), function() {
+        $.each("input[name='question-1']:checked", function() {
             if($(this).val() === questions[1].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }
+        });
 
-        $.each("input[name='question-2']:checked"), function() {
+        $.each("input[name='question-2']:checked", function() {
             if($(this).val() === questions[2].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }
+        });
 
-        $.each("input[name='question-3']:checked"), function() {
+        $.each("input[name='question-3']:checked", function() {
             if($(this).val() === questions[3].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }
+        });
 
-        $.each("input[name='question-4']:checked"), function() {
+        $.each("input[name='question-4']:checked", function() {
             if($(this).val() === questions[4].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }
+        });
 
-        $.each("input[name='question-5']:checked"), function() {
+        $.each("input[name='question-5']:checked", function() {
             if($(this).val() === questions[5].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }
+        });
 
-        $.each("input[name='question-6']:checked"), function() {
+        $.each("input[name='question-6']:checked", function() {
             if($(this).val() === questions[6].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }
+        });
                         
         this.result() //this.result goes after all the each question
     }, 
     result: function() {
+        // Use clearInterval for our timer variable
+        console.log(timer);
+        clearInterval(timer);
+        // Remove all HTML from the questions array
+        // New HTML:  add Correct Answers, Incorrect Answers and Unanswered questions
+        //HINT:  to calculate unanswered questions, subtract the correct & incorrect answers from the total questions.length
 
     }
    
