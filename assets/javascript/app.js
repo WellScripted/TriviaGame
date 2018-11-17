@@ -1,5 +1,3 @@
-//Pseudocode for app.js
-
 //Click Event for Start button:
 
 $('#start').on("click", function() {
@@ -20,51 +18,38 @@ var questions = [{
     answer: "George Washington"
     //Image of George Washington
 }, {
-    //Repeat same format for all 6 other questions
+    question: "What is our Nation's founding document?",
+    choices: ["Magna Carta", "Emancipation Proclaimation", "Articles of Confederation", "Declaration of Independence"],
+    answer: "Declaration of Independence",
+    //Image of Declaration of Independence
 },{
-    //3rd question
+    question: "What is the oldest State in the Union?",
+    choices: ["New York", "Pennsylvania", "Delaware", "Texas"],
+    answer: "Delaware"
+    //Image of Delaware or it's State Flag
 },{
-    //4th question
+    question: "What year was the 'Louisiana Purchase' made?",
+    choices: ["1984", "1492", "1803", "1776"],
+    answer: "1803"
+    //Image of the Louisiana Purchase
 },{
-    //5th question
+    question: "The 'Reconstruction Era' began after the Revolutionary War ended in 1783",
+    choices: ["True","False"],
+    answer: "False"
+    //Alert: WRONG! The "Reconstruction Era" began after the end of the Civil War in 1865
 },{
-    //6th question
+    question: "Maryland was originally a colony founded for Catholics in the 'New World'",
+    choices: ["True","False"],
+    answer: "True"
+    //Alert: Correct! It was founded by Lord Baltimore and other Catholics for religious freedom.
+},{
+    question: "What year did the 'War of 1812' begin?",
+    choices: ["1811", "1810", "1812", "1815"],
+    answer: "1812"
+    //Image of the War of 1812
 }]; 
 
-//Who was the 1st President of the United States of America?
-//Choices: Abe Lincoln, Jefferson Davis, Benjamin Franklin, George Washington
-//Answer: George Washington
-//Image of George Washington
-
-//What is our Nation's founding document?
-//Choices: Magna Carta, Emancipation Proclaimation, Articles of Confederation, Declaration of Independence
-//Answer: Declaration of Independence
-//Image of Declaration of Independence
-
-//What is the oldest State in the Union?
-//Choices: New York, Pennsylvania, Delaware, Texas
-//Answer: Delaware
-//Image of Delaware or it's State Flag
-
-//What year was the "Louisiana Purchase" made?
-//Choices: 1984, 1492, 1803, 1776
-//Answer: 1803
-//Image of the Louisiana Purchase
-
-//The "Reconstruction Era" began after the Revolutionary War ended in 1783
-//Choices: True or False
-//Answer: False
-//Alert: WRONG! The "Reconstruction Era" began after the end of the Civil War in 1865
-
-//Maryland was originally a colony founded for Catholics in the "New World"
-//Choices: True or False
-//Answer: True
-//Alert: Correct! It was founded by Lord Baltimore and other Catholics for religious freedom.
-
-//What year did the "War of 1812" begin?
-//Choices: 1811, 1810, 1812, 1815
-//Answer: 1812
-//Image of the War of 1812
+//Game logic
 
 var timer;
 var game = {
@@ -84,7 +69,15 @@ var game = {
         timer = setInterval(game.countdown, 1000);
         $("#sub-container").prepend("<h2> Time Remaining: <span id='counter'></span> Seconds: </h2>");
         $("#start").remove();
-        //LOOP THROUGH QUESTIONS ARRAY HERE!
+        for (var i = 0; i < questions.length; i++) {
+            $("#sub-container").append("<h2>" + questions[i].question + "</h2>");
+            for (var j = 0; j < questions[i].answers.length; j++) {
+                $("#sub-container").append("<input type='radio' name='question-" + i +
+              "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
+            }
+          }
+      
+          $("#sub-container").append("<button id='start'>START!</button>");
     },
     
     //Done method
@@ -96,6 +89,55 @@ var game = {
                 game.incorrect++;
             }
         } //Create for each question in the array(name='question-1', question-2)
+
+        $.each("input[name='question-1']:checked"), function() {
+            if($(this).val() === questions[1].answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        }
+
+        $.each("input[name='question-2']:checked"), function() {
+            if($(this).val() === questions[2].answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        }
+
+        $.each("input[name='question-3']:checked"), function() {
+            if($(this).val() === questions[3].answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        }
+
+        $.each("input[name='question-4']:checked"), function() {
+            if($(this).val() === questions[4].answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        }
+
+        $.each("input[name='question-5']:checked"), function() {
+            if($(this).val() === questions[5].answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        }
+
+        $.each("input[name='question-6']:checked"), function() {
+            if($(this).val() === questions[6].answer) {
+                game.correct++;
+            } else {
+                game.incorrect++;
+            }
+        }
+                        
         this.result() //this.result goes after all the each question
     }, 
     result: function() {
