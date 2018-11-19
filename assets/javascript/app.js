@@ -69,31 +69,32 @@ var game = {
     //Start method
     start: function() {
         timer = setInterval(game.countdown, 1000);
-        $("#sub-container").prepend("<h2> Time Remaining: <span id='counter'></span> Seconds: </h2>");
+        $("#sub-container").prepend("<h2> Time Remaining: <span id='counter'>120</span> Seconds</h2>");
+        // Remove start button
         $("#start").remove();
         for (var i = 0; i < questions.length; i++) {
             $("#sub-container").append("<h2>" + questions[i].question + "</h2>");
             for (var j = 0; j < questions[i].choices.length; j++) {
-                $("#sub-container").append("<input type='radio' name='question-" + i +
+                $("#sub-container").append("<input type='radio' name='question-" + [i] +
               "' value='" + questions[i].choices[j] + "''>" + questions[i].choices[j] + "</br>");
             }
           }
-          //change to submit button w/listener
-          $("#sub-container").append("<button id='submit'>SUBMIT!</button>");
-          $("#submit").on("click", game.done); 
+      
+          $("#sub-container").append("<br><button id='done'>DONE!</button>");
     },
     
     //Done method
+    
     done: function() {
-        $.each("input[name='question-0']:checked", function() {
+        $.each($("input[name='question-0']:checked"), function() {
             if($(this).val() === questions[0].answer) {
                 game.correct++;
             } else {
                 game.incorrect++;
             }
-        }) //Create for each question in the array(name='question-1', question-2)
+        }); //Create for each question in the array(name='question-1', question-2)
 
-        $.each("input[name='question-1']:checked", function() {
+        $.each($("input[name='question-1']:checked"), function() {
             if($(this).val() === questions[1].answer) {
                 game.correct++;
             } else {
@@ -101,7 +102,7 @@ var game = {
             }
         });
 
-        $.each("input[name='question-2']:checked", function() {
+        $.each($("input[name='question-2']:checked"), function() {
             if($(this).val() === questions[2].answer) {
                 game.correct++;
             } else {
@@ -109,7 +110,7 @@ var game = {
             }
         });
 
-        $.each("input[name='question-3']:checked", function() {
+        $.each($("input[name='question-3']:checked"), function() {
             if($(this).val() === questions[3].answer) {
                 game.correct++;
             } else {
@@ -117,7 +118,7 @@ var game = {
             }
         });
 
-        $.each("input[name='question-4']:checked", function() {
+        $.each($("input[name='question-4']:checked"), function() {
             if($(this).val() === questions[4].answer) {
                 game.correct++;
             } else {
@@ -125,7 +126,7 @@ var game = {
             }
         });
 
-        $.each("input[name='question-5']:checked", function() {
+        $.each($("input[name='question-5']:checked"), function() {
             if($(this).val() === questions[5].answer) {
                 game.correct++;
             } else {
@@ -133,7 +134,7 @@ var game = {
             }
         });
 
-        $.each("input[name='question-6']:checked", function() {
+        $.each($("input[name='question-6']:checked"), function() {
             if($(this).val() === questions[6].answer) {
                 game.correct++;
             } else {
@@ -144,11 +145,23 @@ var game = {
         this.result() //this.result goes after all the each question
     }, 
     result: function() {
-        // Use clearInterval for our timer variable
-        console.log(timer);
-        clearInterval(timer);
+        
         // Remove all HTML from the questions array
+        $("#sub-container h2").remove();
+
         // New HTML:  add Correct Answers, Incorrect Answers and Unanswered questions
+        $("sub-container").append("<h3>Correct Answers: " + this.correct + "<h3>");
+        $("sub-container").append("<h3>Incorrect Answers: " + this.incorrect + "<h3>");
+        $("sub-container").append(("<h3>Unanswered questions: " + (questions.length - (this.incorrect + this.correct)) + "</h3>"));
+
+        if(this.correct > this.incorrect) {
+            alert("You WIN!")
+        } else if(this.incorrect > this.correct) {
+            alert("You're a Total Loser")
+        }
+
+
+    
         //HINT:  to calculate unanswered questions, subtract the correct & incorrect answers from the total questions.length
 
     }
