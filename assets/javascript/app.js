@@ -157,7 +157,7 @@ var game = {
         if(this.correct > this.incorrect) {
             alert("You WIN!")
         } else if(this.incorrect > this.correct) {
-            alert("You're a Total Loser")
+            alert("You're a total loser!")
         } 
 
 

@@ -1,0 +1,14 @@
+div.jumbotron.text-center {
+    background-image: url(../images/flag-cover.jpg);
+    background-position:top;
+    height:auto;
+    display:block;
+    width:100%;
+    text-align:center;
+    
+}
+
+h1.display-4 {
+    text-align: center;
+    font-display: bold;
+}
